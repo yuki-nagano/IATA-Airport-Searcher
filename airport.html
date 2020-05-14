@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Airport 3-letter code</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="3-letter code">
+    <ul class="suggestions">
+    </ul>
+  </form>
+<script>
+const airportJson = 'https://raw.githubusercontent.com/yuki-nagano/IATA-Airport-Searcher/master/airports.json';
+
+const airports = [];
+
+fetch(airportJson)
+  .then(blob => blob.json()) // get promise
+  .then(data => airports.push(...data)) // push a big array into an array
+
+// get your data first
+// get all your functionality in place
+// hook them up to eventlisteners || HTML/style
+
+// find matches in the array and return the search word (city or state)
+function findMatches(wordToMatch, airports) { // string, array
+  return airports.filter(place => {
+    const regex = new RegExp(wordToMatch, 'gi'); // g: global, i: insensitive 
+    return place.iata.match(regex); // .match: regex sintax
+  });
+}
+
+function displayMatches() {
+  const matchAirport = findMatches(this.value, airports);
+  const html = matchAirport.map(place => {
+    const regex = new RegExp(this.value, 'gi');
+    // for highlight
+    const letters = place.iata.replace(regex, `<span class="hl">${this.value.toUpperCase()}</span>`);
+    
+    return `
+      <li>
+        <span class="name">${place.name}, ${place.iso}</span>
+        <span class="letters">${letters}</span>
+      </li>    
+      `;
+
+  }).join(''); // make them a big string
+  suggestions.innerHTML = html;
+}
+
+// event
+const searchInput = document.querySelector('.search'); // input box
+const suggestions = document.querySelector('.suggestions');
+
+searchInput.addEventListener('change', displayMatches);
+searchInput.addEventListener('keyup', displayMatches); // to prevent the time lag
+
+</script>
+</body>
+</html>
