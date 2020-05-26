@@ -2,14 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
+  <!-- for twitter card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@yukinagano_hb" />
+  <meta name="twitter:image" content="https://yuki-nagano.github.io/IATA-Airport-Searcher/thumbnail.png" />
+  <meta property="og:title" content="IATA Airport Searcher" />
+  <meta property="og:description" content="For practice JavaScript fetching API. Input IATA 3-letter code and will show which airport it is." /> 
+
   <title>Airport 3-letter code</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <form class="search-form">
-    <input type="text" class="search" placeholder="3-letter code">
+    <input type="text" class="search" placeholder="Input 3-letter code">
     <ul class="suggestions">
+      <!-- search result will be shown here -->
     </ul>
   </form>
 <script>
