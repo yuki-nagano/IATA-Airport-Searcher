@@ -1,6 +1,5 @@
 html {
   box-sizing: border-box;
-  background: #ffc600;
   font-family: 'helvetica neue';
   font-size: 20px;
   font-weight: 200;
@@ -11,6 +10,7 @@ html {
   background-size: cover; /*　100% 100vh;  w h */
   background-attachment: fixed;
 }
+
 
 *, *:before, *:after {
   box-sizing: inherit;
@@ -78,3 +78,36 @@ span.letters {
 .hl {
   background: #ffc600;
 }
+
+/* for smart phone */
+@media (max-width: 768px) {
+  html {
+    background-position-x: center!important;
+  }
+
+  .search-form {
+    max-width: 80%;
+    margin: 25% auto;
+  }
+
+  input.search {
+    font-size: 35px;
+  }
+  
+  .suggestions li {
+    padding: 15px;
+    font-size: 21px;
+  }
+
+  span.name {
+    padding-top: 3%;
+  }
+
+  span.letters {
+    margin-left: 3%;
+    font-size: x-large;
+    padding-top: inherit;
+  }
+  
+}
+
