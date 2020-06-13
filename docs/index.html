@@ -43,14 +43,25 @@ function findMatches(wordToMatch, airports) { // string, array
 }
 
 function displayMatches() {
-  const matchAirport = findMatches(this.value, airports);
+  // if (this.value === "") {
+    //console.log("empty!");
+    //suggestions.innerHTML = "";
+      // const lists = document.querySelectorAll('li');
+      // suggestions.style.display = "none"
+      // suggestions.innerHTML = ""; Doesnt work
+      // lists.forEach(li => {
+      //   li.style.display = "none"; doesnt work
+      //   //suggestions.classList.remove(li); Doesnt work
+      // }); 
+  //} 
+  const matchAirport = findMatches(this.value, airports); // this.value: searched word
   const html = matchAirport.map(place => {
-    const regex = new RegExp(this.value, 'gi');
+    const regex = new RegExp(this.value, 'gi'); // general intensive(ignore cases)
     // for highlight
     const letters = place.iata.replace(regex, `<span class="hl">${this.value.toUpperCase()}</span>`);
-    
+
     return `
-      <li>
+      <li class="list">
         <span class="name">${place.name}, ${place.iso}</span>
         <span class="letters">${letters}</span>
       </li>    
@@ -60,12 +71,22 @@ function displayMatches() {
   suggestions.innerHTML = html;
 }
 
+function clearSuggestions() {
+  // this is the solution!
+  if (this.value === "") {
+    suggestions.innerHTML = "";
+  }
+}
+
 // event
 const searchInput = document.querySelector('.search'); // input box
 const suggestions = document.querySelector('.suggestions');
 
 searchInput.addEventListener('change', displayMatches);
 searchInput.addEventListener('keyup', displayMatches); // to prevent the time lag
+
+searchInput.addEventListener('change', clearSuggestions);
+searchInput.addEventListener('keyup', clearSuggestions);
 
 </script>
 </body>
